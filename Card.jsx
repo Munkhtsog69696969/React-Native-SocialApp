@@ -7,6 +7,7 @@ const profileImg=require("./assets/profile.jpeg")
 export const Card=()=>{
     const Click=()=>{
         // alert("clicked")
+        console.log("1")
     }
 
     return(
@@ -15,7 +16,7 @@ export const Card=()=>{
                 <Image style={styles.profileImg} source={profileImg}/>
                 <View style={styles.desc}>
                     <View style={styles.nameCont}>
-                        <Text style={styles.name}>John Smith</Text>
+                        <Text style={styles.name}>John Samith</Text>
                     </View>
                     <View style={styles.nameCont}>
                         <Text style={styles.date}>6 minutes ago</Text>
@@ -38,7 +39,8 @@ const styles = StyleSheet.create({
         height:160,
         // borderRadius:"30px",
         padding:20,
-        marginVertical:10
+        marginBottom:10,
+        position:"relative"
     },
     profile:{
         display:"flex",
@@ -78,9 +80,11 @@ const styles = StyleSheet.create({
         // border:"1px solid blue",
         height:80,
         width:60,
-        flex:1,
+        // flex:1,
         justifyContent:"center",
         alignItems:"center",
+        position:"absolute",
+        right:10
     },
     text:{
         fontSize:20,
