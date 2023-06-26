@@ -16,7 +16,7 @@ export default function App() {
   useEffect(()=>{
     axiosBaseUrl.get("/")
       .then(async(res)=>{
-        // console.log(res.data);
+        console.log(res.data);
         setPosts(res.data.posts)
       }).catch((err)=>{
         console.log(err)

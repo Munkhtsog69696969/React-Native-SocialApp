@@ -41,7 +41,7 @@ export const Card=({post})=>{
     }
 
     return(
-        <View style={styles.container}>
+        <View style={post.imageUrl=="404" ? styles.container : styles.containerImage}>
             <View style={styles.profile}>
                 <Image style={styles.profileImg} source={profileImg}/>
                 <View style={styles.desc}>
@@ -49,7 +49,7 @@ export const Card=({post})=>{
                         <Text style={styles.name}>{post.creator}</Text>
                     </View>
                     <View style={styles.nameCont}>
-                        <Text style={styles.date}>{post.createdAt}</Text>
+                        <Text style={styles.date}>{post.createdAt.slice(0,10)}</Text>
                     </View>
                 </View>
                 <View style={styles.hamburgerCont}>
@@ -66,7 +66,7 @@ export const Card=({post})=>{
                             :
 
                             ""
-                        },
+                        }
                         {
                             update ?
 
@@ -83,6 +83,17 @@ export const Card=({post})=>{
                 </View>
             </View>
             <Text style={styles.text}>{post.text}</Text>
+            {
+                post.imageUrl!="404"
+
+                ?
+
+                <Image style={styles.image} source={post.imageUrl}/>
+
+                :
+
+                ""
+            }
         </View>
     )
 }
@@ -91,6 +102,14 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor:"white",
         height:160,
+        // borderRadius:"30px",
+        padding:20,
+        marginBottom:10,
+        position:"relative"
+    },
+    containerImage: {
+        backgroundColor:"white",
+        height:380,
         // borderRadius:"30px",
         padding:20,
         marginBottom:10,
@@ -164,5 +183,10 @@ const styles = StyleSheet.create({
         height:100,
         right:150,
         borderRadius:10
+    },
+    image:{
+        width:200,
+        height:200,
+        resizeMode:'cover'
     }
 });

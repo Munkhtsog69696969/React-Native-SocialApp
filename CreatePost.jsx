@@ -7,13 +7,14 @@ import { Entypo } from '@expo/vector-icons';
 export const CreatePost=()=>{
     const {createPost,setCreatePost}=useContext(DataContext);
     const [input,setInput]=useState();
+    const [image,setImage]=useState();
 
     const Close=()=>{
         setCreatePost(false);
     }
 
     const Create=()=>{
-        axiosBaseUrl.post("/", {text:input})
+        axiosBaseUrl.post("/", {text:input , imageUrl:image})
             .then(async(res)=>{
                 console.log(res.data);
                 setInput("");
@@ -22,6 +23,19 @@ export const CreatePost=()=>{
                 console.log(err)
             })
     }
+
+    function uploadPostImage(event){
+        var reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = () => {
+            // console.log(reader.result)
+            setImage(reader.result)
+        };
+        reader.onerror = (error) => {
+          console.log("upload image error:", error);
+        };
+    }
+    
 
     return(
         createPost ?
@@ -38,6 +52,16 @@ export const CreatePost=()=>{
                         Enter Text
                     </Text>
                     <input value={input} onChange={(e)=>{setInput(e.target.value)}}/>
+                    <input onChange={uploadPostImage} type="file"/>
+                    {
+                        image ? 
+
+                        <Image style={styles.image} source={image}/>
+
+                        :
+                        
+                        ""
+                    }
                     <Button onPress={Create} title='Create'></Button>
                 </View>
             </View>
@@ -70,5 +94,10 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent:"center",
         alignItems:"center"
+    },
+    image:{
+        width:200,
+        height:200,
+        resizeMode:"cover"
     }
 });

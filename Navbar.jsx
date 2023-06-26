@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View , Image , TouchableOpacity } from 'react-native';
+import { StyleSheet, Button, Text, View , Image , TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 import { DataContext } from './context/DataProvider';
@@ -11,8 +11,13 @@ export const Navbar=()=>{
         setCreatePost(prev=>!prev);
     }
 
+    const Google=()=>{
+        window.open("http://localhost:3001/auth/google" , "_self")
+    }
+
     return(
         <View style={styles.container}>
+            <Button onPress={Google} title='Sign up with Google'/>
             <AntDesign onPress={Create} name="pluscircleo" style={styles.icon} />
         </View>
     )
